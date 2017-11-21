@@ -49,4 +49,16 @@ app.post("/projects", function(req, res){
   });
 });
 
+//Show Route
+app.get("/projects/:id", function(req,res){
+  Project.findById(req.params.id, function(err, foundProject){
+    if (err) {
+      res.redirect("/projects");
+    } else {
+      res.render("show", {project: foundProject});
+    }
+  })
+});
+
+
 app.listen(3000);

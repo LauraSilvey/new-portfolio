@@ -5,7 +5,8 @@
 <% projects.forEach(function(project){ %>
      <div>
        <img src="<%= project.image %>">
-       <p> <%= project.techList %> </p>
+       <p><%= project.techList %></p>
+       <a href="/projects/<%= project._id %>">More Info</a>
      </div>
 <% }) %>
 
