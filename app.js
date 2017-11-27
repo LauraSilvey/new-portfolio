@@ -84,5 +84,16 @@ app.put("/projects/:id", function(req, res){
   })
 });
 
+//Delete Route
+app.delete("/projects/:id", function(req, res){
+  Project.findByIdAndRemove(req.params.id, function(err){
+    if(err) {
+      res.redirect("/projects");
+    } else {
+      res.redirect("/projects");
+    }
+  })
+});
+
 
 app.listen(3000);

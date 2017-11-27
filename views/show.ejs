@@ -1,16 +1,16 @@
 <% include ./partials/header %>
 
 <div class="ui main text container segment">
-<!--   <div class="ui huge header"><%= project.techList %></div> -->
-  <!-- <div class="ui top attached segment"> -->
     <div class="item">
       <img class="ui centered rounded image" src="<%= project.image %>">
       <div class="content">
         <p><%= project.techList %></p> 
       </div>
+      <a class="ui orange basic button" href="/projects/<%= project._id %>/edit">Edit</a>
+      <form id="delete" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+        <button class="ui red basic button">Delete</button>
+      </form>
     </div>
-    
-<!--   </div> -->
 
 </div>
 
