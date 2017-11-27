@@ -1,13 +1,15 @@
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-var express = require("express");
-var app = express();
+methodOverride= require("method-override"),
+mongoose = require("mongoose"),
+express = require("express"),
+app = express();
 
 // App Config
 mongoose.connect("mongodb://localhost/portfolio", {useMongoClient: true});
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride("_method"));
 
 // Mongoose/Model Config
 var projectSchema = new mongoose.Schema({
@@ -56,6 +58,28 @@ app.get("/projects/:id", function(req,res){
       res.redirect("/projects");
     } else {
       res.render("show", {project: foundProject});
+    }
+  })
+});
+
+//Edit Route
+app.get("/projects/:id/edit", function(req, res){
+  Project.findById(req.params.id, function(err, foundProject){
+    if(err){
+      res.redirect("/projects");
+    } else {
+      res.render("edit", {project: foundProject});
+    }
+  })
+});
+
+//Update Route
+app.put("/projects/:id", function(req, res){
+  Project.findByIdAndUpdate(req.params.id, req.body.project, function(err, updatedBlog){
+    if(err){
+      res.redirect("/projects");
+    } else {
+      res.redirect("/projects/" + req.params.id);
     }
   })
 });
