@@ -1,13 +1,27 @@
 <% include ./partials/header %>
 
-<h1>Projects Page</h1>
+<div class="ui main text container">
+  <div class="ui huge header">
+    <h1>Projects</h1>
+    <div class="ui attached segment">
+      <div class="ui divided items">
+        <% projects.forEach(function(project){ %>
+          <div class="item">
+            <div class="image">
+              <img src="<%= project.image %>">
+            </div>
+            
+            <p><%= project.techList %></p>
+            <a href="/projects/<%= project._id %>">More Info</a>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>  
+</div>
 
-<% projects.forEach(function(project){ %>
-     <div>
-       <img src="<%= project.image %>">
-       <p><%= project.techList %></p>
-       <a href="/projects/<%= project._id %>">More Info</a>
-     </div>
-<% }) %>
+
+
+
 
 <% include ./partials/footer %>
